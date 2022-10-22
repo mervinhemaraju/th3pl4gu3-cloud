@@ -1,0 +1,43 @@
+name: Pre-Commit Pre-Checks
+
+on:
+  workflow_call:
+    inputs:
+      directory:
+        required: false
+        default: "./"
+        type: string
+        description: "The Directory to run the action workflow in"
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    env:
+      TFLINT_VERSION: 0.41.0
+      TERRAFORM_DOCS_VERSION: 0.16.0
+    steps:
+      - name: Install Python3.x
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.9"
+
+      - name: Install Pre-Commit
+        run: |
+          pip install pre-commit
+          pre-commit --version
+
+      - name: Install Pre-Commit Dependencies
+        run: |
+          curl -Lo /tmp/tflint.zip https://github.com/wata727/tflint/releases/download/v${TFLINT_VERSION}/tflint_linux_amd64.zip
+          unzip -o /tmp/tflint.zip -d /usr/local/bin tflint
+          chmod u+x /usr/local/bin/tflint
+          curl -Lo /tmp/terraform-docs.tar.gz https://github.com/terraform-docs/terraform-docs/releases/download/v${TERRAFORM_DOCS_VERSION}/terraform-docs-v${TERRAFORM_DOCS_VERSION}-linux-amd64.tar.gz
+          tar -xf /tmp/terraform-docs.tar.gz -C /usr/local/bin
+          chmod u+x /usr/local/bin/terraform-docs
+          tflint --version
+          terraform-docs --version
+
+      - name: Run Pre-Commit on all Files
+        working-directory: ${{ inputs.directory }}
+        run: |
+          pre-commit run --all-files --verbose --show-diff-on-failure

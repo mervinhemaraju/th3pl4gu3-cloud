@@ -1,6 +1,6 @@
 
 # * Creates a monthly limit budget and notification system
-resource "aws_budgets_budget" "monthly-limit-budget" {
+resource "aws_budgets_budget" "monthly_limit_budget" {
   name              = "monthly-limit-budget"
   budget_type       = "COST"
   limit_amount      = "5"
