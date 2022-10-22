@@ -1,0 +1,35 @@
+repos:
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.51.0
+    hooks:
+      - id: terraform_fmt
+      - id: terraform_tflint
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.2.0
+    hooks:
+      - id: check-merge-conflict
+      - id: end-of-file-fixer
+      - id: detect-aws-credentials
+        args: [--allow-missing-credentials]
+      - id: detect-private-key
+      # Disabled until terraform-docs fixes the double whitespace issue
+      # https://github.com/terraform-docs/terraform-docs/issues/296
+      #- id: trailing-whitespace
+  - repo: local
+    hooks:
+      - id: terraform-docs-modules
+        name: terraform-docs-modules
+        # echo is required because of the double line break at the end of the document, depends on the same issue
+        # https://github.com/terraform-docs/terraform-docs/issues/296
+        entry: bash -c 'for MODULE in $(ls -1 modules) ; do echo "$(terraform-docs markdown table modules/$MODULE --sort-by-required)" > modules/$MODULE/README.md ; done'
+        language: system
+        pass_filenames: false
+  - repo: local
+    hooks:
+      - id: terraform-docs-accounts
+        name: terraform-docs-accounts
+        # echo is required because of the double line break at the end of the document, depends on the same issue
+        # https://github.com/terraform-docs/terraform-docs/issues/296
+        entry: bash -c 'for ACCOUNT in $(ls -1 accounts) ; do for REGION in $(ls -1 accounts/$ACCOUNT); do for COMPONENT in $(ls -1 accounts/$ACCOUNT/$REGION); do echo "$(terraform-docs markdown table accounts/$ACCOUNT/$REGION/$COMPONENT --sort-by-required)" > accounts/$ACCOUNT/$REGION/$COMPONENT/README.md ; done ; done ; done'
+        language: system
+        pass_filenames: false

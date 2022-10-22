@@ -1,0 +1,8 @@
+directory:
+  - ./
+framework: all
+no-guide: true 
+output: junitxml
+quiet: false
+skip-check: 
+soft-fail: false
