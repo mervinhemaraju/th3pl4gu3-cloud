@@ -31,3 +31,6 @@ terraform.rc
 
 # Exclude lock hcl files
 *.lock.hcl
+
+# Ignore builds
+builds/

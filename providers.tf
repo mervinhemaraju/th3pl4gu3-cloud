@@ -3,7 +3,9 @@
 provider "aws" {
 
   # * The AWS Environment Configurations
-  region = var.region
+  region     = var.region
+  access_key = var.aws_access_key
+  secret_key = var.aws_secret_key
 
   # * The Default Tags
   default_tags {
@@ -25,12 +27,8 @@ terraform {
     }
   }
 
-  # * Backend config for Terraform Cloud
-  cloud {
-    organization = "th3pl4gu3-prod"
-
-    workspaces {
-      name = "github-api-workspace"
-    }
+  # * Backend Configuration for Terraform Cloud
+  backend "local" {
+    path = "/Users/mervin.hemaraju/Documents/Personal/tf-state-files/th3pl4gu3-aws/terraform.tfstate"
   }
 }

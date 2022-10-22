@@ -17,7 +17,6 @@ locals {
     # > Lambda default configurations
     lambda = {
       SOURCE_PATH          = "./functions/email-function/"
-      RCE                  = 2
       RETRIES_ATTEMPT      = 0
       TIMEOUT              = "60"
       HANDLER              = "main.main"

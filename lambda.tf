@@ -15,10 +15,8 @@ module "email-function" {
   timeout                           = local.constants.lambda.TIMEOUT
   create_async_event_config         = true
   maximum_retry_attempts            = local.constants.lambda.RETRIES_ATTEMPT
-  reserved_concurrent_executions    = local.constants.lambda.RCE
 
-  # * Do not create a role as it is not needed for now
-  create_role = false
+  attach_cloudwatch_logs_policy = true
 
   trusted_entities = local.constants.lambda.TRUSTED_ENTITIES
 }
