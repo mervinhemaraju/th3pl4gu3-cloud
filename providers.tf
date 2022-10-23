@@ -21,10 +21,12 @@ terraform {
 
   # * AWS Provider
   required_providers {
+
     aws = {
       source  = "hashicorp/aws"
       version = "4.9.0"
     }
+
   }
 
   # * Backend Configuration for Terraform Cloud
