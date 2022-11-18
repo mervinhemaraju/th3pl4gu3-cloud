@@ -9,9 +9,6 @@
 crash.log
 crash.*.log
 
-# Exclude all secrests*.tfvars
-secrets*.tfvars
-
 # Ignore override files as they are usually used to override resources locally and so
 # are not checked in
 override.tf
@@ -34,3 +31,14 @@ terraform.rc
 
 # Ignore builds
 builds/
+
+# Exclude all secret files
+secrets*.*
+
+# Env files and folders
+.env
+.venv
+env/
+venv/
+.env/
+.venv/

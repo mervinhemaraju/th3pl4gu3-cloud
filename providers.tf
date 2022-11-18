@@ -13,6 +13,11 @@ provider "aws" {
   }
 }
 
+# * OCI Provider for Oracle cloud connection
+provider "oci" {
+  alias = "oci"
+}
+
 # * The Terraform Module
 terraform {
 
@@ -27,6 +32,10 @@ terraform {
       version = "4.9.0"
     }
 
+    oci = {
+      source  = "oracle/oci"
+      version = "4.100.0"
+    }
   }
 
   # * Backend Configuration for Terraform Cloud
