@@ -1,4 +1,4 @@
-# Th3pl4gu3-aws
+# Th3pl4gu3-cloud
 
 Th3pl4gu3-cloud is the repo that contains infrastructure as a code for my personal resources hosted across multiple cloud providers.
 
