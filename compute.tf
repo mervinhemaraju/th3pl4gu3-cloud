@@ -1,4 +1,5 @@
 
+# > OCI Compute Instance Resources
 # * Create a compute instance for web
 resource "oci_core_instance" "web-01" {
 
@@ -17,7 +18,7 @@ resource "oci_core_instance" "web-01" {
 
   source_details {
     source_type             = "image"
-    source_id               = "ocid1.image.oc1.af-johannesburg-1.aaaaaaaa7njfmfxcybo66dwsn4u6asz5ecsszyto56ufbltkp7kugixnctxa"
+    source_id               = local.constants.compute.image.ubuntu_oci
     boot_volume_size_in_gbs = "80"
   }
 
@@ -27,7 +28,7 @@ resource "oci_core_instance" "web-01" {
 
 }
 
-# * Create a reserver public ip
+# * Create a reserved public ip
 resource "oci_core_public_ip" "res-ip-web-01" {
 
   compartment_id = var.compartment_production_id

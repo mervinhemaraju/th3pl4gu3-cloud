@@ -21,6 +21,11 @@ variable "gmail_app_token" {
 }
 
 # * OCI vars
+variable "compartment_root_id" {
+  type      = string
+  sensitive = true
+}
+
 variable "compartment_production_id" {
   type      = string
   sensitive = true

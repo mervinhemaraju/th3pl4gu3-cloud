@@ -1,6 +1,7 @@
 
+# > AWS Budgets
 # * Creates a monthly limit budget and notification system
-resource "aws_budgets_budget" "monthly_limit_budget" {
+resource "aws_budgets_budget" "aws_monthly_limit_budget" {
   name              = "monthly-limit-budget"
   budget_type       = "COST"
   limit_amount      = "5"
@@ -29,7 +30,7 @@ resource "aws_budgets_budget" "monthly_limit_budget" {
 }
 
 # * Creates a zero spend budget and notification system
-resource "aws_budgets_budget" "zero_spend_budget" {
+resource "aws_budgets_budget" "aws_zero_spend_budget" {
   name              = "zero-spend-budget"
   budget_type       = "COST"
   limit_amount      = "1"
@@ -46,4 +47,31 @@ resource "aws_budgets_budget" "zero_spend_budget" {
     notification_type          = "ACTUAL"
     subscriber_email_addresses = ["mervinhemaraju16@gmail.com"]
   }
+}
+
+# > OCI Budgets
+resource "oci_budget_budget" "oci_zero_spend_budget" {
+  compartment_id = var.compartment_root_id
+  amount         = 1
+  reset_period   = "MONTHLY"
+
+  description  = "A zero spend budget for OCI"
+  display_name = "zero-spend-budget"
+  target_type  = "COMPARTMENT"
+  targets      = [var.compartment_production_id]
+}
+
+resource "oci_budget_alert_rule" "oci_zsb_rule" {
+  budget_id      = oci_budget_budget.oci_zero_spend_budget.id
+  threshold      = 0.1
+  threshold_type = "ABSOLUTE"
+  type           = "ACTUAL"
+
+  display_name = "0-strict-threshold"
+  message      = "The zer budget spend has been breached on OCI"
+  recipients   = "mervinhemaraju16@gmail.com"
+
+  depends_on = [
+    oci_budget_budget.oci_zero_spend_budget
+  ]
 }

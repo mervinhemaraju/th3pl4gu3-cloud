@@ -14,6 +14,14 @@ locals {
   # > Resources Constants
   constants = {
 
+    compute = {
+
+      image = {
+        ubuntu_oci = "ocid1.image.oc1.af-johannesburg-1.aaaaaaaa7njfmfxcybo66dwsn4u6asz5ecsszyto56ufbltkp7kugixnctxa"
+      }
+
+    }
+
     # > Lambda default configurations
     lambda = {
       SOURCE_PATH          = "./functions/email-function/"

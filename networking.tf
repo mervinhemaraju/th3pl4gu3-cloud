@@ -23,10 +23,11 @@ resource "oci_core_subnet" "subnet-public-web" {
   dns_label                  = "publicweb"
   prohibit_public_ip_on_vnic = false
   route_table_id             = oci_core_vcn.prod-web-vcn.default_route_table_id
-  security_list_ids          = [oci_core_vcn.prod-web-vcn.default_security_list_id]
+  security_list_ids          = [oci_core_vcn.prod-web-vcn.default_security_list_id, oci_core_security_list.oci_web_security_list.id]
 
   depends_on = [
-    oci_core_vcn.prod-web-vcn
+    oci_core_vcn.prod-web-vcn,
+    oci_core_security_list.oci_web_security_list
   ]
 }
 
