@@ -23,3 +23,7 @@ output "oci_ad_name" {
 output "instance-public-ip-web-01" {
   value = oci_core_instance.web-01.public_ip
 }
+# * Output the id for dynamo db table jeeyah-bucket-list
+output "jeeyah-bucket-list-id" {
+  value = aws_dynamodb_table.jeeyah_bucket_list.id
+}

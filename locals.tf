@@ -14,6 +14,12 @@ locals {
   # > Resources Constants
   constants = {
 
+    database = {
+      dynamodb = {
+        bucket_list_name = "jeeyah-bucket-list"
+      }
+    }
+
     compute = {
 
       image = {

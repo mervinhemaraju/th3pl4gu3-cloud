@@ -37,20 +37,6 @@ resource "oci_core_security_list" "oci_web_security_list" {
     source_type = "CIDR_BLOCK"
     protocol    = 6 #* TCP protocol code
 
-    description = "Inbound Flask Deployment Traffic"
-
-    tcp_options {
-      max = 8085
-      min = 8080
-    }
-  }
-
-  ingress_security_rules {
-
-    source      = "0.0.0.0/0"
-    source_type = "CIDR_BLOCK"
-    protocol    = 6 #* TCP protocol code
-
     description = "Inbound HTTPS Traffic"
 
     tcp_options {
