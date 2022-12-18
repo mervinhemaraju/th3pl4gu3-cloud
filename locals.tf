@@ -47,5 +47,11 @@ locals {
       ]
     }
 
+    # > SSM Default configurations
+    ssm = {
+      jeeyah_website = {
+        bucket_list_categories = ["all", "travel", "food", "hobbies", "couple"]
+      }
+    }
   }
 }
